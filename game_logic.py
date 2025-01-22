@@ -1,3 +1,4 @@
+import random
 from display import display_message, display_list, display_weather_event
 from input_utils import get_selection
 
