@@ -1,0 +1,113 @@
+----------------------------------------------------------------------------------------------------------------------------------
+Empire - CLOAD Fixes in TEXT Format   2011-12-12   Jim McGinley - www.bigpants.ca
+----------------------------------------------------------------------------------------------------------------------------------
+0 'COPYRIGHT (C) CLOAD 1981                                     
+1 ' - EMPIRE -                                                  
+3 REM PETER TREFONAS 12/30/79                                   
+5 'CREDITS:"Hammurabi" BY RICK MERRIL & DAVID AHL,"Santa Paravia" BY GEORGE BLANK 
+
+This version of Empire is in Basic and shipped on cassette with CLOAD Magazine - 1981 February
+CLOAD shipped 2 fixes/patches afterward (CLOAD Magazine - 1981 March, CLOAD Magazine - 1981 April) that had to be manually inputted.
+I could not find a patched version so I manually applied the fixes using the TRS32 emulator in December 2011.
+I played a full game of Empire (40 years) with the fixes and they worked great.
+
+This files contains the exact line fixes outlined in CLOAD.
+
+Important:
+1. The fixed lines can be copy from here & pasted into the TRS32 emulator AFTER Empire has been loaded.
+   Much easier than using the TRS-80 editor
+2. However, you will need the TRS32 CAPS LOCK *ON* to keep lower-case when pasting
+   No idea why this is the case.
+   (When you're playing games, you need CAPS LOCK ON to enter lower case)
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+FIRST FIX
+----------------------------------------------------------------------------------------------------------------------------------
+ORIGINAL LINES
+--------------
+245 GOSUB57:INPUT"How many";E2:IFE2<>INT(E2)ORE2<0GOTO245ELSEIFA(K,4)<E1*E2GOSUB57:PRINT"Think again . . .You only have";A(K,4);Z(K,6):GOSUB59:GOTO245
+
+
+465 QR=RND(A(Q,5)):IFQR*A(Q,6)<A(K,4)GOTO469                    
+
+
+283 PRINT@333,Z(I,A(I,17));" ";Z(I,0);" Of ";Z(I,1);":":I3=A(I,19)                                                              
+
+
+379 GOSUB63:PRINTZ(K,A(K,17));" ";Z(K,0);" has been assinated by an ambitious":PRINT"noble":GOTO387                             
+
+
+365 IFA(K,17)>3ANDA(K,16)>9ANDA(K,4)>3100ANDA(K,18)>40CLS:PRINT"Game over . . .":PRINTZ(K,5);" ";Z(K,0);" Of ";Z(K,1);" Wins !":PRINT:PRINT:KK=1:GOSUB43:END
+
+
+FIXED LINES (paste these into TRS32 after loading game)
+-----------
+245 IFE2=0THEN255ELSEE2=0:GOSUB57:INPUT"How many";E2:IFE2<>INT(E2)ORE2<0GOTO245ELSEIFA(K,4)<E1*E2GOSUB57:PRINT"Think again . . .You only have";A(K,4);Z(K,6):GOSUB59:GOTO245
+
+
+465 QR=RND(0)*A(Q,5):IFQR*A(Q,6)<A(K,4)GOTO469
+
+
+283 PRINT@333,Z(I,A(I,17));" ";Z(I,0);" of ";Z(I,1);":":I3=A(I,19)
+
+
+379 GOSUB63:PRINTZ(K,A(K,17));" ";Z(K,0);" has been assassinated by an ambitious":PRINT"noble":GOTO387
+
+
+365 IFA(K,17)>3ANDA(K,16)>9ANDA(K,4)>3100ANDA(K,18)>40CLS:A(K,17)=5:PRINT"Game over . . .":PRINTZ(K,5);" ";Z(K,0);" Of ";Z(K,1);" Wins !":PRINT:PRINT:KK=1:GOSUB43:END
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+SECOND FIX
+----------------------------------------------------------------------------------------------------------------------------------
+ORIGINAL LINES
+--------------
+245 IFE2=0THEN255ELSEE2=0:GOSUB57:INPUT"How many";E2:IFE2<>INT(E2)ORE2<0GOTO245ELSEIFA(K,4)<E1*E2GOSUB57:PRINT"Think again . . .You only have";A(K,4);Z(K,6):GOSUB59:GOTO245
+
+Merchants and nobles free fix...
+231 ONE+1GOTO257,233,235,237,239,241,243                        
+
+247 IFE2>A(K,3)GOSUB57:PRINT"You don't have enough serfs to train":GOSUB59:GOTO245                                              
+
+253 IFE1=8LETA(K,3)=A(K,3)-E2                                   
+
+233 E1=1000:J=RND(7):A(K,7)=A(K,7)+J:A(K,3)=A(K,3)-J:GOTO245    
+
+243 H=RND(4):A(K,18)=A(K,18)+H:A(K,3)=A(K,3)-H:E1=5000:GOTO245  
+
+more...
+277 IQ=IQ+1:GOSUB57:INPUT"How many soldiers do you wish to send";I1:IFI1>A(K,15)GOSUB57:PRINT"Think again... You have only";A(K,15);"soldiers":GOSUB59:GOTO277
+
+279 CLS:PRINT@269,Z(K,A(K,17));" ";Z(K,0);" of ";Z(K,1);":":PRINT@169,"Soldiers remaining:";:I4=A(K,19):I5=0:I2=A(I,15):I0=A(I,1):O1=75-I1-I2:A(K,15)=A(K,15)-I1
+
+271 IFI<>0ANDA(K,0)<>0GOSUB57:PRINT"That player is no longer in the game":GOSUB59:GOTO263
+
+469 A(Q,4)=A(Q,4)+QR*A(Q,6)*.9:A(Q,5)=A(Q,5)-QR
+
+                                                                
+FIXED LINES (paste these into TRS32 after loading game)
+-----------
+245 E2=0:GOSUB57:INPUT"How many";E2:IFE2<>INT(E2)ORE2<0GOTO245ELSEIFE2=0THEN255ELSEIFA(K,4)<E1*E2GOSUB57:PRINT"Think again . . .You only have";A(K,4);Z(K,6):GOSUB59:GOTO245
+
+Merchants and nobles free fix...
+231 J=0:H=0:ONE+1GOTO257,233,235,237,239,241,243
+
+247 IFE2+(E2-1)*(J+H)>A(K,3)GOSUB57:PRINT"You don't have enough serfs to train":GOSUB59:GOTO245
+
+253 IFE1=8LETA(K,3)=A(K,3)-E2ELSEA(K,7)=A(K,7)+J*E2:A(K,18)=A(K,18)+H*E2:A(K,3)=A(K,3)-(J+H)*E2
+
+233 E1=1000:J=RND(7):GOTO245
+
+243 E1=5000:H=RND(4)
+
+more...
+277 GOSUB57:INPUT"How many soldiers do you wish to send";I1:IFI1<1THEN259ELSEIFI1>A(K,15)GOSUB57:PRINT"Think again... You have only";A(K,15);"soldiers":GOSUB59:GOTO277
+
+279 IQ=IQ+1:CLS:PRINT@269,Z(K,A(K,17));" ";Z(K,0);" of ";Z(K,1);":":PRINT@169,"Soldiers remaining:";:I4=A(K,19):I5=0:I2=A(I,15):I0=A(I,1):O1=75-I1-I2:A(K,15)=A(K,15)-I1
+
+271 IFI<>0IFA(I-1,0)<>0GOSUB57:PRINT"That player is no longer in the game":GOSUB59:GOTO263
+
+469 A(Q,4)=A(Q,4)+INT(QR*A(Q,6)*90)/100:A(Q,5)=A(Q,5)-QR

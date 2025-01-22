@@ -1,0 +1,126 @@
+----------------------------------------------------------------------------------------------------------------------------------
+Empire - Instructions   2011-12-12   Jim McGinley - www.bigpants.ca
+----------------------------------------------------------------------------------------------------------------------------------
+0 'COPYRIGHT (C) CLOAD 1981                                     
+1 ' - EMPIRE -                                                  
+3 REM PETER TREFONAS 12/30/79                                   
+5 'CREDITS:"Hammurabi" BY RICK MERRIL & DAVID AHL,"Santa Paravia" BY GEORGE BLANK 
+- do not confuse with "EMPIRE 5.3 - UNIX"
+
+The instructions were originally provided as a separate basic program - "EMPINST/BAS" "CLOAD Magazine - 1981 February" 
+Too hard to read/use so I used TRS32 to copy & paste them into this text file.
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+INSTUCTIONS
+----------------------------------------------------------------------------------------------------------------------------------
+Hello!     Welcome to  E M P I R E . . .                      
+                                                                
+Imagine yourself to be the ruler of a small, unimportant piece  
+of European land way back in the medieval ages. Your country is 
+beset by many problems - no industry, little trade, small army, 
+underpopulation, angry neighbors, plague, and all the other     
+day-to-day problems a capable leader must learn to face. Am-    
+bitious by necessity, you must aquire land, capital, and an     
+army just to survive. Because of the short lifetimes back then, 
+you'll have only a limited amount of time to build your coun-   
+try into an empire.                                             
+                                                                
+  Competent rule will gradually be rewarded with lofty titles - 
+Knight, Prince, King, and finally  -- Emperor --
+
+- - -
+   Sounds easy?  Then consider this - five other city-states are 
+also struggling to become the emperor, and they don't just in-  
+tend to passively watch you win. They control armies which can  
+attack at a moments notice, and perhaps devastate your country. 
+They control the grain market, and if you think OPEC is bad,    
+just wait and see how scarce and expensive grain can become.    
+  Of course, a competent ruler could make a killing on the      
+grain market. With proper planning, your harvests should be     
+plentiful. You could solve overpopulation problems by raising a 
+large army to be killed off in battle.                          
+  Nevertheless, your overiding concern should be lebensraum -   
+living room. There is only a limited amount of land to be con-  
+quered. If you can defeat the barbarian hordes, and the well-   
+trained standing armies of the other nations, and then defeat   
+their peasant militias, perhaps you may attain the well deser-  
+ved title of Emperor.
+
+- - -
+Taxes:                                                          
+  The customs tax applies only to immigrants to your nation.    
+Often, lower customs tax means more immigrants.                 
+  The sales tax is closely intertwined into your capitalist     
+economy. While it has the potential of raising lots of money,   
+overly high taxes tend to stifle industrial profits.            
+  Income taxes are paid by all inhabitants and industry. Again, 
+lower income tax often means increased industrial output.       
+                                                                
+  You have the option each year to invest your earnings in      
+different types of trade and industry. In the years to follow,  
+these investments, if managed correctly, will more than pay     
+for themselves.                                                 
+                                                                
+- - -                                                                
+Types of investments:                                           
+                                                                
+  Marketplaces are a relatively cheap investment that are quite 
+profitable because they encourage the formation of a middle     
+class - the merchants. And, as you are probably aware, the      
+middle class pays an inordinate share of taxes.                 
+  Grain mills are necessary to process the harvest, and con-    
+sequently, usually do quite well when there is a large harvest. 
+  Foundries are necessary for the creation of large armies.     
+Several of them will allow you to equip a much larger army      
+than otherwise.                                                 
+  Shipyards have the greatest profit potential of all invest-   
+ments. Because of a larger volume of orders during good wea-    
+ther, there is often a better return during these years.
+
+- - -
+  Armies are never a profitable investment. Besides costing     
+a large initial investment, they also cost a lot to maintain    
+and train. In addition, they also require a greater fraction    
+of the harvest than serfs.                                      
+  Of course, one should give himself the luxury of building a   
+palace. What else could distinguish an emperor from all the     
+other kings with their castles, than a palace? Also, with a     
+palace, your country will begin to attract more nobles.         
+                                                                
+Other general hints:                                            
+  You always lose 10% as a brokerage fee when dealing on the    
+grain market. When you sell your grain at different prices,     
+the market price is the weighted average of the sales prices    
+(this helps to prevent large yearly price fluctuations). To     
+prevent those unscrupulous rulers who try to use the market as  
+a method to avoid the rats, you can't buy back your own grain.  
+
+- - -
+Also, leave a portion of your grain reserve for planting for    
+next year's harvest.                                            
+Often, it is beneficial to feed your people much more than they 
+require. Immigrants are usually attracted to a prosperous nat-  
+ion, and sometimes, even merchants and nobles move in.          
+                                                                                                                                
+  Up to six people can play this game. Rulers not played by     
+humans will be played by your TRS-80, with its playing abil-    
+ity based on the average of the human players.                  
+
+- - -
+Winning:                                                        
+                                                                
+To become a prince, you must pass these rather stringent        
+qualifications:8 marketplaces, 4 mills, palace 20% completed,   
+a land-over-serf ratio of 4.8, over 10 nobles, and over 2300    
+serfs.                                                          
+                                                                
+To become a king, you must have:14 marketplaces, 6 mills,       
+palace 60% completed, 1 foundry, land-over-serf ratio of at     
+least 5.0, Over 2600 serfs and 25 nobles.                       
+                                                                
+To become an +EMPEROR+ you must meet all of the above qual-     
+ifications, and ....over 3100 serfs and 40 nobles.              
+                                                                
+-- Position the tape and type 'CLOAD' when you are ready-       
+Good luck, future rulers                                        
