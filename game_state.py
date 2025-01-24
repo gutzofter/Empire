@@ -6,9 +6,9 @@ class GameState:
         self.num_players = num_players
         self.current_player_index = 0
 
-        for i in range(1, num_players + 1):
-            ruler_name = input(f"Who is the ruler of Land {i}? ")
-            ruler_title = input(f"What is the ruler's title (e.g., King, Queen) for Land {i}? ")
+        for i in range(num_players):
+            ruler_name = input(f"Who is the ruler of Land {i + 1}? ")
+            ruler_title = input(f"What is the ruler's title (e.g., King, Queen) for Land {i + 1}? ")
             self.players.append({
                 "active": True,
                 "land": 10000,

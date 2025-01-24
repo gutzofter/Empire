@@ -1,8 +1,10 @@
 from game_state import GameState
 from game_logic import player_turn, process_weather_event, check_game_over
-from display import display_summary, display_land_holdings
+from display import clear_screen, display_summary, display_land_holdings
+
 
 def main():
+    clear_screen()
     print("Welcome to E M P I R E!")
     num_players = int(input("How many people are playing? (1-6): "))
     game_state = GameState(num_players)
@@ -18,6 +20,7 @@ def main():
                 player_turn(game_state)
         game_over = check_game_over(game_state)
     print("Thank you for playing E M P I R E!")
+
 
 if __name__ == "__main__":
     main()
