@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 from game_state import GameState
 
+
 class TestGameState(unittest.TestCase):
     @patch("builtins.input", side_effect=["Alice", "Queen", "Bob", "King"])
     def test_initialization(self, mock_input):

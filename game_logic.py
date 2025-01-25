@@ -1,6 +1,6 @@
 import random
-from display import display_message, display_list, display_weather_event
-from input_utils import get_selection
+from utils import display_message, display_weather_event, get_selection
+
 
 def process_weather_event(game_state):
     """
@@ -17,6 +17,7 @@ def process_weather_event(game_state):
     weather_roll = random.randint(1, 6)
     description = weather_events[weather_roll]
     display_weather_event(game_state.current_year, description)
+
 
 def player_turn(game_state):
     """
@@ -36,6 +37,7 @@ def player_turn(game_state):
     elif choice_index == 3:  # End Turn
         return
 
+
 def buy_grain(game_state, buyer):
     """
     Allow a player to buy grain from another player or the market.
@@ -46,10 +48,12 @@ def buy_grain(game_state, buyer):
     ]
     if not sellers:
         display_message("No grain available for purchase.")
+        
         return
 
     seller_choices = [
-        f"{seller['ruler_title']} {seller['ruler_name']} ({seller['grain_reserve']} bushels)"
+        f"{seller['ruler_title']} {seller['ruler_name']} "
+        f"({seller['grain_reserve']} bushels)"
         for seller in sellers
     ]
     seller_index = get_selection("Select a seller:", choices=seller_choices)
@@ -57,7 +61,8 @@ def buy_grain(game_state, buyer):
 
     max_purchase = seller["grain_reserve"]
     amount = get_selection(
-        f"How many bushels do you want to buy? (Max: {max_purchase})", min_value=1, max_value=max_purchase
+        f"How many bushels do you want to buy? (Max: {max_purchase})",
+        min_value=1, max_value=max_purchase
     )
     cost = amount * seller["sales_tax"]
     if buyer["treasury"] >= cost:
@@ -79,7 +84,8 @@ def sell_grain(game_state, seller):
 
     max_sell = seller["grain_reserve"]
     amount = get_selection(
-        f"How many bushels do you want to sell? (Max: {max_sell})", min_value=1, max_value=max_sell
+        f"How many bushels do you want to sell? (Max: {max_sell})",
+        min_value=1, max_value=max_sell
     )
     price_per_bushel = random.randint(10, 20)
     earnings = amount * price_per_bushel
@@ -94,10 +100,13 @@ def attack(game_state, attacker):
     targets = [
         p for p in game_state.players if p["active"] and p != attacker
     ]
-    targets.append({"ruler_title": "Barbarians", "ruler_name": "", "land": game_state.barbarian_land})
+    targets.append({
+        "ruler_title": "Barbarians", "ruler_name": "", "land": game_state.barbarian_land
+    })
 
     target_choices = [
-        f"{target['ruler_title']} {target['ruler_name']} ({target['land']} acres)"
+        f"{target['ruler_title']} {target['ruler_name']} "
+        f"({target['land']} acres)"
         for target in targets
     ]
     target_index = get_selection("Choose a target to attack:", choices=target_choices)
