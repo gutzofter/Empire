@@ -2,11 +2,10 @@ import unittest
 from unittest.mock import patch, MagicMock
 from game_logic import process_weather_event, player_turn, buy_grain, sell_grain, attack, check_game_over
 
-
 class TestGameLogic(unittest.TestCase):
 
     @patch('game_logic.display_weather_event')
-    @patch('game_logic.random.randint', return_value=4)
+    @patch('game_logic.random.randint', return_value=4)  
     def test_process_weather_event(self, mock_randint, mock_display_weather_event):
         game_state = MagicMock()
         game_state.current_year = 1

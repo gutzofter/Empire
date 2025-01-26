@@ -46,11 +46,12 @@ def display_summary(players):
     print("-" * 50)
     for player in players:
         if player["active"]:
-            print(
-                f"{player['ruler_name']} {player['ruler_title']} "
-                f"{player['nobles']:>5} {player['soldiers']:>10} {player['merchants']:>10} "
-                f"{player['serfs']:>10} {player['land']:>8} {player['palace_completion'] * 10:>6}%"
+            ruler_info = f"{player['ruler_name']:<10}{player['ruler_title']:<8}"
+            stats_info = (
+                f"{player['nobles']:<8}{player['soldiers']:<8}{player['merchants']:<8}"
+                f"{player['serfs']:<8}{player['land']:<8}{player['palace_completion'] * 100:>6.1f}%"
             )
+            print(ruler_info + stats_info)
 
 def display_weather_event(year, description):
     """Display the weather event for the year."""
@@ -67,3 +68,15 @@ def display_plague_event(player_name, serfs_lost, merchants_lost, soldiers_lost,
     print(f"{merchants_lost} merchants died.")
     print(f"{soldiers_lost} soldiers died.")
     print(f"{nobles_lost} nobles died.")
+
+def display_battle_results(attacker, defender, attacker_losses, defender_losses):
+    """Display the results of a battle."""
+    clear_screen()
+    print(f"Battle Results:\n")
+    print(f"{attacker['ruler_name']} {attacker['ruler_title']} attacked {defender['ruler_name']} {defender['ruler_title']}.")
+    print(f"Attacker losses: {attacker_losses} soldiers.")
+    print(f"Defender losses: {defender_losses} soldiers.")
+    if attacker_losses < defender_losses:
+        print(f"{attacker['ruler_name']} {attacker['ruler_title']} is victorious!")
+    else:
+        print(f"{defender['ruler_name']} {defender['ruler_title']} successfully defended their land.")

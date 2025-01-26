@@ -1,6 +1,6 @@
 from game_state import GameState
 from game_logic import player_turn, process_weather_event, check_game_over
-from display import clear_screen, display_summary, display_land_holdings
+from utils import clear_screen, display_summary, display_land_holdings
 
 
 def main():
