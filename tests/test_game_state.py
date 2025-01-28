@@ -39,6 +39,10 @@ class TestGameState(unittest.TestCase):
         self.assertEqual(game_state.players[0]["merchants"], 25)
         self.assertEqual(game_state.players[0]["soldiers"], 20)
         self.assertEqual(game_state.players[0]["palace_completion"], 0)
+        self.assertEqual(game_state.players[0]["nobles"], 25)
+        self.assertEqual(game_state.players[0]["army_efficiency"], 1.0)
+        self.assertEqual(game_state.players[0]["sales_tax"], 1.0)
+
         # Check inactive player properties
         self.assertEqual(game_state.players[2]["land"], 0)
         self.assertEqual(game_state.players[2]["grain_reserve"], 0)
@@ -47,5 +51,11 @@ class TestGameState(unittest.TestCase):
         self.assertEqual(game_state.players[2]["merchants"], 0)
         self.assertEqual(game_state.players[2]["soldiers"], 0)
         self.assertEqual(game_state.players[2]["palace_completion"], 0)
+        self.assertEqual(game_state.players[2]["nobles"], 0)
+        self.assertEqual(game_state.players[2]["army_efficiency"], 0.0)
+        self.assertEqual(game_state.players[2]["sales_tax"], 0.0)
         self.assertIsNone(game_state.players[2]["ruler_name"])
         self.assertIsNone(game_state.players[2]["ruler_title"])
+
+if __name__ == "__main__":
+    unittest.main()
