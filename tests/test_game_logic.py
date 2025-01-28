@@ -37,6 +37,14 @@ class TestGameLogic(unittest.TestCase):
         mock_display_message.assert_called_with("Transaction complete: Bought 1 bushels for 2 gold.")
 
     @patch('game_logic.display_message')
+    def test_buy_grain_no_sellers(self, mock_display_message):
+        game_state = MagicMock()
+        buyer = {'active': True, 'ruler_title': 'King', 'ruler_name': 'Arthur', 'treasury': 100, 'grain_reserve': 0}
+        game_state.players = [buyer]
+        buy_grain(game_state, buyer)
+        mock_display_message.assert_called_once_with("No grain available for purchase.")
+
+    @patch('game_logic.display_message')
     @patch('game_logic.get_selection', return_value=1)
     def test_sell_grain(self, mock_get_selection, mock_display_message):
         game_state = MagicMock()
@@ -47,6 +55,16 @@ class TestGameLogic(unittest.TestCase):
         self.assertEqual(seller['grain_reserve'], 9)
         self.assertEqual(seller['treasury'], 15)
         mock_display_message.assert_called_with("Sold 1 bushels for 15 gold.")
+
+    @patch('game_logic.display_message')
+    @patch('game_logic.get_selection', side_effect=[0, 1])
+    def test_buy_grain_cannot_afford(self, mock_get_selection, mock_display_message):
+        game_state = MagicMock()
+        buyer = {'active': True, 'ruler_title': 'King', 'ruler_name': 'Arthur', 'treasury': 1, 'grain_reserve': 0}
+        seller = {'active': True, 'ruler_title': 'Queen', 'ruler_name': 'Guinevere', 'grain_reserve': 50, 'sales_tax': 2, 'treasury': 0}
+        game_state.players = [buyer, seller]
+        buy_grain(game_state, buyer)
+        mock_display_message.assert_called_once_with("You can't afford that!")
 
     @patch('game_logic.display_message')
     @patch('game_logic.get_selection', return_value=0)
@@ -69,6 +87,68 @@ class TestGameLogic(unittest.TestCase):
         game_state.players = [{'ruler_title': 'King', 'ruler_name': 'Arthur', 'active': True}]
         self.assertTrue(check_game_over(game_state))
         mock_display_message.assert_called_once_with("King Arthur is the ruler of the world!")
+
+    @patch('game_logic.display_message')
+    @patch('game_logic.get_selection', return_value=0)
+    def test_player_turn_buy_grain(self, mock_get_selection, mock_display_message):
+        game_state = MagicMock()
+        player = {'ruler_title': 'King', 'ruler_name': 'Arthur', 'treasury': 100, 'grain_reserve': 0, 'active': True}
+        seller = {'ruler_title': 'Queen', 'ruler_name': 'Guinevere', 'grain_reserve': 50, 'sales_tax': 2, 'treasury': 0, 'active': True}
+        game_state.players = [player, seller]
+        game_state.current_player_index = 0
+        with patch('game_logic.get_selection', side_effect=[0, 0, 1]):
+            player_turn(game_state)
+            
+        self.assertEqual(player['grain_reserve'], 1)
+        self.assertEqual(player['treasury'], 98)
+        self.assertEqual(seller['grain_reserve'], 49)
+        self.assertEqual(seller['treasury'], 2)
+        mock_display_message.assert_any_call("King Arthur's turn:")
+        mock_display_message.assert_any_call("Transaction complete: Bought 1 bushels for 2 gold.")
+
+    @patch('game_logic.display_message')
+    @patch('game_logic.get_selection', return_value=1)
+    def test_player_turn_sell_grain(self, mock_get_selection, mock_display_message):
+        game_state = MagicMock()
+        player = {'ruler_title': 'King', 'ruler_name': 'Arthur', 'grain_reserve': 10, 'treasury': 0}
+        game_state.players = [player]
+        game_state.current_player_index = 0
+        with patch('game_logic.random.randint', return_value=15):
+            with patch('game_logic.get_selection', side_effect=[1, 1]):
+                player_turn(game_state)
+        self.assertEqual(player['grain_reserve'], 9)
+        self.assertEqual(player['treasury'], 15)
+        mock_display_message.assert_any_call("King Arthur's turn:")
+        mock_display_message.assert_any_call("Sold 1 bushels for 15 gold.")
+
+    @patch('game_logic.display_message')
+    @patch('game_logic.get_selection', return_value=2)
+    def test_player_turn_attack(self, mock_get_selection, mock_display_message):
+        game_state = MagicMock()
+        attacker = {'ruler_title': 'King', 'ruler_name': 'Arthur', 'soldiers': 100, 'army_efficiency': 1, 'land': 10, 'active': True}
+        target = {'ruler_title': 'Queen', 'ruler_name': 'Guinevere', 'soldiers': 50, 'army_efficiency': 1, 'land': 20, 'active': True}
+        game_state.players = [attacker, target]
+        game_state.current_player_index = 0
+        with patch('game_logic.random.randint', return_value=30):
+            with patch('game_logic.get_selection', side_effect=[2, 0]):
+                player_turn(game_state)
+        self.assertEqual(attacker['land'], 40)
+        self.assertEqual(target['land'], -10)
+        self.assertFalse(target['active'])
+        mock_display_message.assert_any_call("King Arthur's turn:")
+        mock_display_message.assert_any_call("Victory! You gained 30 acres of land.")
+        mock_display_message.assert_any_call("Queen Guinevere has been defeated!")
+
+    @patch('game_logic.display_message')
+    @patch('game_logic.get_selection', return_value=3)
+    def test_player_turn_end_turn(self, mock_get_selection, mock_display_message):
+        game_state = MagicMock()
+        player = {'ruler_title': 'King', 'ruler_name': 'Arthur'}
+        game_state.players = [player]
+        game_state.current_player_index = 0
+        player_turn(game_state)
+        mock_display_message.assert_called_once_with("King Arthur's turn:")
+        mock_get_selection.assert_called_once_with("Choose an action:", choices=["Buy Grain", "Sell Grain", "Attack", "End Turn"])
 
 if __name__ == '__main__':
     unittest.main()
